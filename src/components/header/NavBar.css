@@ -1,0 +1,10 @@
+Search{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#AppBar{
+    background-color: red;
+}
