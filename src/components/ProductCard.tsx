@@ -1,4 +1,4 @@
-import {useNavigate} from "react-router";
+import {useNavigate} from "react-router-dom";
 import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
 import {CardContent, Typography} from "@mui/material";
