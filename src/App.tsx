@@ -1,5 +1,5 @@
 
-import Product from "./pages/Product.tsx";
+import Router from "./router/Router.tsx";
 import NavBar from "./components/header/NavBar.tsx";
 
 interface HeaderProps {
@@ -14,7 +14,7 @@ const App = ({ searchQuery, setSearchQuery }: HeaderProps) => {
                 searchQuery={searchQuery}
                 setSearchQuery={setSearchQuery}
             />
-            <Product/>
+            <Router/>
         </div>
     );
 };
