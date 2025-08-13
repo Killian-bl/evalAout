@@ -7,7 +7,9 @@ import App from './App.tsx';
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <BrowserRouter>
-            <App />
+            <App searchQuery={''} setSearchQuery={function(): void {
+                throw new Error('Function not implemented.');
+            } } />
         </BrowserRouter>
     </StrictMode>,
 );
