@@ -11,18 +11,18 @@ function AddCartButton({product}: ProductCardProps) {
     const [addCart, setAddCart] = useState(false);
 
     useEffect(() => {
-        const storedCart = JSON.parse(localStorage.getItem('added') || '[]');
+        const storedCart = JSON.parse(localStorage.getItem('cart') || '[]');
         const isAlreadyAdded = storedCart.find((fav: productType)=> fav.id === product.id);
-        setAddCart(!isAlreadyAdded);
+        setAddCart(!!isAlreadyAdded);
     }, [product.id]);
 
     const toggleAddCart = () => {
-        const storedCart: productType[] = JSON.parse(localStorage.getItem('added') || '[]');
+        const storedCart: productType[] = JSON.parse(localStorage.getItem('cart') || '[]');
         const isAlreadyAdded = storedCart.find((fav: productType)=> fav.id === product.id);
 
         let updatedCart;
         if (isAlreadyAdded) {
-            updatedCart = storedCart.filter((fav: productType)=> fav.id === product.id);
+            updatedCart = storedCart.filter((fav: productType)=> fav.id !== product.id);
             alert("Produit retiré du panier.");
             setAddCart(false);
         } else {
@@ -30,7 +30,7 @@ function AddCartButton({product}: ProductCardProps) {
             alert("Produit ajouté au panier.");
             setAddCart(true);
         }
-        localStorage.setItem('added', JSON.stringify(updatedCart));
+        localStorage.setItem('cart', JSON.stringify(updatedCart));
     };
 
     return (

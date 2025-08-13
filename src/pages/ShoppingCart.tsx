@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import type {productType} from "../@types/ProductType"
 import { Grid } from "@mui/material";
 import ProductCard from "../components/ProductCard.tsx";
+import Button from "@mui/material/Button";
 
 const ProductDetails = () => {
     const [cart, setCart] = useState<productType[]>([]);
@@ -24,6 +25,15 @@ const ProductDetails = () => {
                            </Grid>
                        ))
                    )}
+               </Grid>
+               <Grid item xs={12}>
+                   <Button
+                       variant="contained"
+                       color="primary"
+                       onClick={handleOrder}
+                   >
+                       Commander
+                   </Button>
                </Grid>
            </div>
        </>
