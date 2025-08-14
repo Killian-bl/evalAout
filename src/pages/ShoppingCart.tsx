@@ -1,11 +1,11 @@
 import {useEffect, useState} from "react";
 import type {productType} from "../@types/ProductType"
 import { Grid } from "@mui/material";
-import ProductCard from "../components/ProductCard.tsx";
+import CartCard from "../components/CartCard.tsx";
 import Button from "@mui/material/Button";
 import {useNavigate} from "react-router-dom";
 
-const ProductDetails = () => {
+const ShoppingCart = () => {
     const [cart, setCart] = useState<productType[]>([]);
     const navigate = useNavigate();
 
@@ -41,7 +41,22 @@ const ProductDetails = () => {
                    ) : (
                        cart.map((product: productType) => (
                            <Grid item xs={12} key={product.id}>
-                               <ProductCard product={product}/>
+                               <CartCard
+                                   product={product}
+                                   onQuantityChange={(newQuantity) => {
+                                       const updatedCart = cart.map((item) =>
+                                           item.id === product.id ? { ...item, quantity: newQuantity } : item
+                                       );
+                                       setCart(updatedCart);
+                                       localStorage.setItem("cart", JSON.stringify(updatedCart));
+                                   }}
+                                   onRemove={() => {
+                                       const updatedCart = cart.filter((item) => item.id !== product.id);
+                                       setCart(updatedCart);
+                                       localStorage.setItem("cart", JSON.stringify(updatedCart));
+                                   }}
+                               />
+
                            </Grid>
                        ))
                    )}
@@ -60,4 +75,4 @@ const ProductDetails = () => {
     )
 };
 
-export default ProductDetails;
+export default ShoppingCart;

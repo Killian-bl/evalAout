@@ -12,26 +12,6 @@ interface ProductCardProps {
 const ProductCard = ({product}: ProductCardProps) => {
     const navigate = useNavigate();
 
-    const mockProducts = [
-        {
-            id: 1,
-            name: "Chaise design",
-            price: 5,
-            overview: "Chaise confortable en bois massif"
-        },
-        {
-            id: 2,
-            name: "Table en chêne",
-            price: 15,
-            overview: "Table solide pour votre salle à manger"
-        },
-        {
-            id: 3,
-            name: "Lampe vintage",
-            price: 8,
-            overview: "Lampe au style rétro pour éclairer votre pièce"
-        }
-    ];
 
     return (
         <div>
@@ -48,7 +28,7 @@ const ProductCard = ({product}: ProductCardProps) => {
                 </CardContent>
                 <Button variant="contained" size="small" sx={{backgroundColor: 'black', color: 'antiquewhite'}}
                         onClick={() => navigate('/ProductDetails/' + product.id)}>Info</Button>
-                <AddCartButton product={mockProducts[0]} />
+                <AddCartButton product={product} />
             </Card>
         </div>
     )
