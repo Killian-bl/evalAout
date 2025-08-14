@@ -3,14 +3,34 @@ import type {productType} from "../@types/ProductType"
 import { Grid } from "@mui/material";
 import ProductCard from "../components/ProductCard.tsx";
 import Button from "@mui/material/Button";
+import {useNavigate} from "react-router-dom";
 
 const ProductDetails = () => {
     const [cart, setCart] = useState<productType[]>([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const storedProduct = JSON.parse(localStorage.getItem('cart') || '[]');
         setCart(storedProduct);
     }, []);
+
+    const handleOrder = () => {
+        const allOrders = JSON.parse(localStorage.getItem("orders") || "[]");
+        const newOrder = {
+            id: Date.now(),
+            date: new Date().toLocaleString(),
+            products: cart
+        };
+
+        localStorage.setItem("orders", JSON.stringify([...allOrders, newOrder]));
+
+        localStorage.setItem("order", JSON.stringify(cart));
+
+        localStorage.setItem("cart", "[]");
+        setCart([]);
+
+        navigate("/order");
+    };
 
     return (
        <>
