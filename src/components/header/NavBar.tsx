@@ -69,7 +69,7 @@ interface Props {
     setSearchQuery: (value: string) => void;
 }
 
-export default function NavBar({ searchQuery, setSearchQuery }: Props) { {
+export default function NavBar({ searchQuery, setSearchQuery }: Props) {
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
@@ -269,4 +269,4 @@ export default function NavBar({ searchQuery, setSearchQuery }: Props) { {
             {renderMenu}
         </Box>
     );
-}}
+}

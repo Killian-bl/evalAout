@@ -1,20 +1,15 @@
-
+import { useState } from "react";
 import Router from "./router/Router.tsx";
-import NavBar from "./components/header/NavBar.tsx";
+import Header from "./pages/Header/Header.tsx";
 
-interface HeaderProps {
-    searchQuery: string;
-    setSearchQuery: (value: string) => void;
-}
 
-const App = ({ searchQuery, setSearchQuery }: HeaderProps) => {
+const App = () => {
+    const [searchQuery, setSearchQuery] = useState("");
+
     return (
         <div className={"AppContainer"}>
-            <NavBar
-                searchQuery={searchQuery}
-                setSearchQuery={setSearchQuery}
-            />
-            <Router/>
+            <Header searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+            <Router searchQuery={searchQuery} />
         </div>
     );
 };

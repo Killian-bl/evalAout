@@ -5,10 +5,14 @@ import ShoppingCart from "../pages/ShoppingCart.tsx";
 import Admin from "../pages/Admin.tsx";
 import Order from "../components/Order.tsx";
 
-const Router = () => {
+interface RouterProps {
+    searchQuery: string;
+}
+
+const Router = ({ searchQuery }: RouterProps) => {
     return (
         <Routes>
-            <Route path="/Product" element={<Product/>} />
+            <Route path="/Product" element={<Product searchQuery={searchQuery}/>} />
             <Route path="/ProductDetails/:id" element={<ProductDetails/>} />
             <Route path="/ShoppingCart" element={<ShoppingCart/>} />
             <Route path="/Admin" element={<Admin/>} />

@@ -2,7 +2,11 @@ import ProductCard from "../components/ProductCard.tsx";
 import { useState } from "react";
 import type { productType } from "../@types/ProductType";
 
-const Product = () => {
+interface ProductsPageProps {
+    searchQuery: string;
+}
+
+const Product = ({ searchQuery }: ProductsPageProps) => {
 
     const mockProducts:  productType[] = [
         {
@@ -34,11 +38,17 @@ const Product = () => {
         }));
     };
 
+    const filteredProducts = mockProducts.filter((product) =>
+        product.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
 return (
     <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-        {mockProducts.map((product) => (
-            <ProductCard key={product.id} product={{ ...product, quantity: quantities[product.id] ?? 1 }}
-                         onQuantityChange={(newQty) => handleQuantityChange(product.id, newQty)}
+        {filteredProducts.map((product) => (
+            <ProductCard
+                key={product.id}
+                product={{ ...product, quantity: quantities[product.id] ?? 1 }}
+                onQuantityChange={(newQty) => handleQuantityChange(product.id, newQty)}
             />
         ))}
     </div>
