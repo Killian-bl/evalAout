@@ -1,9 +1,9 @@
-import { Card, CardContent, Typography, Button } from "@mui/material";
+import { Card, CardContent, Typography, Button, TextField } from "@mui/material";
 import type { productType } from "../@types/ProductType";
 import { useNavigate } from "react-router-dom";
 
 interface ProductCardProps {
-    product: productType & { quantity?: number };
+    product: productType;
     onQuantityChange?: (newQuantity: number) => void;
     onRemove?: () => void;
 }
@@ -17,21 +17,23 @@ const CartCard = ({ product, onQuantityChange, onRemove }: ProductCardProps) => 
                 <Typography gutterBottom variant="h5" component="div">
                     {product.name}
                 </Typography>
-                <Typography variant="body2">
-                    {product.overview}
-                </Typography>
 
-                {/* Sélecteur de quantité */}
+                {product.overview && (
+                    <Typography variant="body2">{product.overview}</Typography>
+                )}
+
                 {onQuantityChange && (
-                    <input
+                    <TextField
                         type="number"
-                        min={1}
+                        label="Quantité"
+                        size="small"
+                        inputProps={{ min: 1 }}
                         value={product.quantity ?? 1}
-                        onChange={(e) => onQuantityChange(parseInt(e.target.value))}
+                        onChange={(e) => onQuantityChange(Number(e.target.value))}
+                        sx={{ mt: 1, width: 100 }}
                     />
                 )}
 
-                {/* Bouton Supprimer */}
                 {onRemove && (
                     <Button
                         variant="outlined"
@@ -47,8 +49,8 @@ const CartCard = ({ product, onQuantityChange, onRemove }: ProductCardProps) => 
             <Button
                 variant="contained"
                 size="small"
-                sx={{ backgroundColor: "black", color: "antiquewhite" }}
-                onClick={() => navigate("/ProductDetails/" + product.id)}
+                sx={{ backgroundColor: "black", color: "antiquewhite", mt: 1 }}
+                onClick={() => navigate(`/ProductDetails/${product.id}`)}
             >
                 Info
             </Button>
@@ -57,3 +59,4 @@ const CartCard = ({ product, onQuantityChange, onRemove }: ProductCardProps) => 
 };
 
 export default CartCard;
+

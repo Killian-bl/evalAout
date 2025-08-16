@@ -183,7 +183,7 @@ export default function NavBar({ searchQuery, setSearchQuery }: Props) { {
 
     return (
         <Box sx={{flexGrow: 1}}>
-            <AppBar position="static" sx={{backgroundColor: 'red', color: 'black'}}>
+            <AppBar position="fixed" sx={{backgroundColor: 'black', color: 'white'}}>
                 <DrawerMenu open={isDrawerOpen} onClose={handleDrawerClose}/>
                 <Toolbar>
                     <IconButton
@@ -202,7 +202,7 @@ export default function NavBar({ searchQuery, setSearchQuery }: Props) { {
                         component="div"
                         sx={{display: {xs: 'none', sm: 'block'}}}
                     >
-                        My Visiotech
+                        APP Produits
                     </Typography>
                     <Box sx={{flexGrow: 1, display: 'flex', justifyContent: 'center', marginLeft: '210px'}}>
                         <Search >

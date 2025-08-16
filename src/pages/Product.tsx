@@ -1,13 +1,15 @@
 import ProductCard from "../components/ProductCard.tsx";
+import { useState } from "react";
+import type { productType } from "../@types/ProductType";
 
 const Product = () => {
 
-    const mockProducts = [
+    const mockProducts:  productType[] = [
         {
             id: 1,
             name: "Chaise design",
             price: 5,
-            overview: "Chaise confortable en bois massif"
+            overview: "Chaise confortable en bois massif",
         },
         {
             id: 2,
@@ -23,10 +25,21 @@ const Product = () => {
         }
     ];
 
+    const [quantities, setQuantities] = useState<Record<number, number>>({});
+
+    const handleQuantityChange = (productId: number, newQuantity: number) => {
+        setQuantities(prev => ({
+            ...prev,
+            [productId]: newQuantity,
+        }));
+    };
+
 return (
     <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
         {mockProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product.id} product={{ ...product, quantity: quantities[product.id] ?? 1 }}
+                         onQuantityChange={(newQty) => handleQuantityChange(product.id, newQty)}
+            />
         ))}
     </div>
 )
